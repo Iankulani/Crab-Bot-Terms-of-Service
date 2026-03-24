@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Crab-Bot | Terms of Service </title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<!-- Font Awesome 6 (Free) for REAL social icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  :root {
+    --blue-deep: #020d1f;
+    --blue-dark: #041230;
+    --blue-mid: #0a2a5e;
+    --blue-accent: #1565c0;
+    --blue-bright: #1e88e5;
+    --blue-glow: #42a5f5;
+    --cyan: #00e5ff;
+    --cyan-dim: #0097a7;
+    --white: #e8f4fd;
+    --grey: #90b4ce;
+    --shell-orange: #ff8c42;
+    --shell-red: #e64a19;
+    --card-bg: rgba(6, 30, 70, 0.7);
+    --border: rgba(66, 165, 245, 0.25);
+    --glow-shadow: 0 0 24px rgba(0, 229, 255, 0.18);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--blue-deep);
+    color: var(--white);
+    font-family: 'Exo 2', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── ANIMATED OCEAN BACKGROUND ── */
+  .ocean-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .ocean-bg::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 30%, rgba(21, 101, 192, 0.28) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 70%, rgba(0, 229, 255, 0.1) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 50% at 50% 50%, rgba(4, 18, 48, 0.9) 0%, transparent 100%);
+    animation: oceanDrift 18s ease-in-out infinite alternate;
+  }
+  @keyframes oceanDrift {
+    from { transform: translate(0, 0) rotate(0deg); }
+    to   { transform: translate(2%, 3%) rotate(2deg); }
+  }
+
+  /* ── BUBBLES ── */
+  .bubble {
+    position: fixed;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(0, 229, 255, 0.35), rgba(0, 229, 255, 0.04));
+    border: 1px solid rgba(0, 229, 255, 0.25);
+    animation: rise linear infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+  @keyframes rise {
+    0%   { transform: translateY(110vh) scale(1); opacity: 0; }
+    10%  { opacity: 0.7; }
+    90%  { opacity: 0.4; }
+    100% { transform: translateY(-10vh) scale(1.1); opacity: 0; }
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 68px;
+    background: rgba(2, 13, 31, 0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+  .nav-logo span {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--cyan);
+    letter-spacing: 3px;
+    text-shadow: 0 0 16px var(--cyan);
+  }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--grey);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--cyan); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 24px 60px;
+  }
+  .hero-badge {
+    display: inline-block;
+    border: 1px solid var(--cyan-dim);
+    color: var(--cyan);
+    font-size: 0.72rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 40px;
+    margin-bottom: 24px;
+    background: rgba(0, 229, 255, 0.06);
+    animation: fadeSlideDown 0.8s ease both;
+  }
+  .hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: 4px;
+    margin-bottom: 16px;
+    animation: fadeSlideDown 0.9s ease 0.1s both;
+  }
+  .hero h1 .crab-word {
+    color: var(--cyan);
+    text-shadow: 0 0 30px rgba(0, 229, 255, 0.6), 0 0 60px rgba(0, 229, 255, 0.2);
+  }
+  .hero h1 .bot-word {
+    color: var(--shell-orange);
+    text-shadow: 0 0 30px rgba(255, 140, 66, 0.5);
+  }
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--grey);
+    max-width: 640px;
+    margin-bottom: 40px;
+    font-weight: 300;
+    animation: fadeSlideDown 1s ease 0.2s both;
+  }
+  .hero-platforms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 48px;
+    animation: fadeSlideDown 1s ease 0.3s both;
+  }
+  .platform-pill {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border: 1px solid rgba(66, 165, 245, 0.4);
+    background: rgba(21, 101, 192, 0.2);
+    color: var(--blue-glow);
+    transition: all 0.2s;
+  }
+  .platform-pill:hover {
+    background: rgba(21, 101, 192, 0.5);
+    border-color: var(--cyan);
+    color: var(--cyan);
+    transform: translateY(-2px);
+  }
+  .scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: var(--grey);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: bobDown 2s ease-in-out infinite;
+  }
+  @keyframes bobDown {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(8px); }
+  }
+  @keyframes fadeSlideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── CRAB ANIMATION ── */
+  .crab-container {
+    position: relative;
+    width: 220px;
+    height: 160px;
+    margin: 0 auto 32px;
+    animation: crabFloat 3s ease-in-out infinite;
+  }
+  @keyframes crabFloat {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-12px); }
+  }
+  .crab-svg { width: 100%; height: 100%; }
+  .crab-leg-left-1  { transform-origin: 70px 90px;  animation: legSwingL 0.5s ease-in-out infinite alternate; }
+  .crab-leg-left-2  { transform-origin: 70px 100px; animation: legSwingL 0.5s ease-in-out 0.1s infinite alternate; }
+  .crab-leg-left-3  { transform-origin: 70px 110px; animation: legSwingL 0.5s ease-in-out 0.2s infinite alternate; }
+  .crab-leg-right-1 { transform-origin: 150px 90px; animation: legSwingR 0.5s ease-in-out infinite alternate; }
+  .crab-leg-right-2 { transform-origin: 150px 100px; animation: legSwingR 0.5s ease-in-out 0.1s infinite alternate; }
+  .crab-leg-right-3 { transform-origin: 150px 110px; animation: legSwingR 0.5s ease-in-out 0.2s infinite alternate; }
+  .crab-claw-left  { transform-origin: 48px 72px;  animation: clawSnap 2s ease-in-out infinite; }
+  .crab-claw-right { transform-origin: 172px 72px; animation: clawSnapR 2s ease-in-out 1s infinite; }
+  .crab-eye-left, .crab-eye-right { animation: eyeBlink 4s ease-in-out infinite; }
+  @keyframes legSwingL  { from { transform: rotate(-8deg); } to { transform: rotate(8deg); } }
+  @keyframes legSwingR  { from { transform: rotate(8deg); }  to { transform: rotate(-8deg); } }
+  @keyframes clawSnap   { 0%,100% { transform: rotate(0deg); } 40%,60% { transform: rotate(-15deg); } }
+  @keyframes clawSnapR  { 0%,100% { transform: rotate(0deg); } 40%,60% { transform: rotate(15deg); } }
+  @keyframes eyeBlink   { 0%,90%,100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
+
+  /* mini crab */
+  .mini-crab {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 70px;
+    height: 55px;
+    z-index: 999;
+    cursor: pointer;
+    animation: miniFloat 2.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(0,229,255,0.5));
+  }
+  @keyframes miniFloat {
+    0%,100% { transform: translateY(0) rotate(-2deg); }
+    50%      { transform: translateY(-8px) rotate(2deg); }
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 24px;
+  }
+  .section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--cyan);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .section-number {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.65rem;
+    color: var(--cyan-dim);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cyan), transparent);
+    margin-bottom: 24px;
+  }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 36px;
+    margin-bottom: 24px;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .card:hover { border-color: rgba(0, 229, 255, 0.4); box-shadow: var(--glow-shadow); }
+  .card:hover::before { opacity: 1; }
+  .card h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--blue-glow);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card p, .card li { color: var(--grey); font-size: 0.95rem; line-height: 1.8; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li { padding: 4px 0 4px 20px; position: relative; }
+  .card ul li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--cyan);
+    font-size: 1.1rem;
+  }
+  .highlight-box, .warning-box {
+    border-radius: 12px;
+    padding: 20px 28px;
+    margin: 20px 0;
+    font-size: 0.92rem;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .highlight-box { background: linear-gradient(135deg, rgba(21, 101, 192, 0.2), rgba(0, 151, 167, 0.1)); border: 1px solid rgba(0, 229, 255, 0.3); color: var(--blue-glow); }
+  .warning-box { background: rgba(230, 74, 25, 0.1); border: 1px solid rgba(255, 140, 66, 0.3); color: #ffb07a; }
+  .platform-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .platform-card {
+    background: rgba(10, 42, 94, 0.5);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.25s;
+  }
+  .platform-card:hover {
+    border-color: var(--cyan);
+    background: rgba(21, 101, 192, 0.3);
+    transform: translateY(-3px);
+  }
+  .platform-card .p-icon { font-size: 2rem; width: 36px; text-align: center; }
+  .platform-card .p-name { font-weight: 600; font-size: 0.95rem; color: var(--white); }
+  .platform-card .p-desc { font-size: 0.77rem; color: var(--grey); }
+
+  .last-updated {
+    text-align: center;
+    color: var(--grey);
+    font-size: 0.82rem;
+    margin-bottom: 60px;
+  }
+  .toc {
+    background: rgba(6, 30, 70, 0.5);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 36px;
+    margin-bottom: 48px;
+  }
+  .toc h3 { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; letter-spacing: 2px; color: var(--grey); text-transform: uppercase; margin-bottom: 16px; }
+  .toc ol { padding-left: 20px; columns: 2; column-gap: 40px; }
+  .toc a { color: var(--blue-glow); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+  .toc a:hover { color: var(--cyan); }
+
+  /* SOCIAL SECTION with realistic icons */
+  .social-section {
+    position: relative;
+    z-index: 1;
+    background: rgba(4, 18, 48, 0.8);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 24px;
+    text-align: center;
+  }
+  .social-section h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    color: var(--grey);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    justify-content: center;
+  }
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: 60px;
+    border: 1px solid var(--border);
+    background: rgba(6, 30, 70, 0.6);
+    backdrop-filter: blur(8px);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--grey);
+    transition: all 0.25s ease;
+  }
+  .social-link i { font-size: 1.5rem; transition: transform 0.2s; }
+  .social-link span { font-weight: 500; }
+  .social-link:hover { transform: translateY(-4px); background: rgba(21, 101, 192, 0.6); border-color: var(--cyan); color: white; }
+  .social-link:hover i { transform: scale(1.05); }
+  /* brand color accents on hover */
+  .social-link[data-brand="github"]:hover { border-color: #ffffff; box-shadow: 0 8px 20px rgba(255,255,255,0.15); }
+  .social-link[data-brand="telegram"]:hover { border-color: #29b6f6; box-shadow: 0 8px 20px rgba(41,182,246,0.25); }
+  .social-link[data-brand="discord"]:hover { border-color: #5865f2; box-shadow: 0 8px 20px rgba(88,101,242,0.25); }
+  .social-link[data-brand="whatsapp"]:hover { border-color: #25D366; box-shadow: 0 8px 20px rgba(37,211,102,0.25); }
+  .social-link[data-brand="pinterest"]:hover { border-color: #E60023; box-shadow: 0 8px 20px rgba(230,0,35,0.25); }
+  .social-link[data-brand="facebook"]:hover { border-color: #1877f2; box-shadow: 0 8px 20px rgba(24,119,242,0.25); }
+  .social-link[data-brand="x"]:hover { border-color: #ffffff; box-shadow: 0 8px 20px rgba(255,255,255,0.2); }
+  .social-link[data-brand="mastodon"]:hover { border-color: #6364ff; box-shadow: 0 8px 20px rgba(99,100,255,0.25); }
+  .social-link[data-brand="signal"]:hover { border-color: #3b76f0; box-shadow: 0 8px 20px rgba(59,118,240,0.25); }
+  .social-link[data-brand="slack"]:hover { border-color: #4A154B; box-shadow: 0 8px 20px rgba(74,21,75,0.3); }
+
+  footer {
+    position: relative;
+    z-index: 1;
+    padding: 40px 48px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: rgba(2, 13, 31, 0.9);
+  }
+  .footer-logo { font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700; color: var(--cyan); letter-spacing: 3px; }
+  .footer-copy { color: var(--grey); font-size: 0.82rem; }
+  .footer-links { display: flex; gap: 24px; list-style: none; }
+  .footer-links a { color: var(--grey); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--cyan); }
+  #progress-bar {
+    position: fixed;
+    top: 68px; left: 0;
+    height: 2px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--cyan), var(--blue-bright));
+    z-index: 999;
+    transition: width 0.1s;
+  }
+  .accept-banner {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 2000;
+    background: rgba(4, 18, 48, 0.97);
+    border-top: 1px solid var(--border);
+    padding: 18px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    backdrop-filter: blur(16px);
+    transition: transform 0.4s ease;
+  }
+  .accept-banner.hidden { transform: translateY(100%); }
+  .btn { padding: 10px 28px; border-radius: 50px; font-size: 0.88rem; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; }
+  .btn-primary { background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); color: var(--blue-deep); }
+  .btn-primary:hover { transform: scale(1.03); box-shadow: 0 4px 20px rgba(0, 229, 255, 0.4); }
+  .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--grey); margin-right: 10px; }
+  @media (max-width: 680px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    footer { flex-direction: column; text-align: center; }
+    .toc ol { columns: 1; }
+    .accept-banner { padding: 18px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ocean-bg"></div>
+<div id="progress-bar"></div>
+
+<nav>
+  <a class="nav-logo" href="#top">
+    <i class="fas fa-bug" style="font-size:28px; color:#00e5ff"></i>
+    <span>CRAB-BOT</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#terms">Terms</a></li>
+    <li><a href="#platforms">Platforms</a></li>
+    <li><a href="#community">Community</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="top">
+  <div class="crab-container">
+    <svg class="crab-svg" viewBox="0 0 220 160" fill="none">
+      <ellipse cx="110" cy="130" rx="55" ry="8" fill="rgba(0,229,255,0.08)"/>
+      <line class="crab-leg-left-1" x1="70" y1="88" x2="34" y2="72" stroke="#1565c0" stroke-width="3.5"/>
+      <line class="crab-leg-left-2" x1="70" y1="98" x2="30" y2="96" stroke="#1565c0" stroke-width="3.5"/>
+      <line class="crab-leg-left-3" x1="70" y1="108" x2="34" y2="118" stroke="#1565c0" stroke-width="3.5"/>
+      <line class="crab-leg-right-1" x1="150" y1="88" x2="186" y2="72" stroke="#1565c0" stroke-width="3.5"/>
+      <line class="crab-leg-right-2" x1="150" y1="98" x2="190" y2="96" stroke="#1565c0" stroke-width="3.5"/>
+      <line class="crab-leg-right-3" x1="150" y1="108" x2="186" y2="118" stroke="#1565c0" stroke-width="3.5"/>
+      <g class="crab-claw-left"><line x1="68" y1="76" x2="42" y2="56" stroke="#1e88e5" stroke-width="4"/><ellipse cx="36" cy="50" rx="10" ry="7" fill="#0a2a5e"/></g>
+      <g class="crab-claw-right"><line x1="152" y1="76" x2="178" y2="56" stroke="#1e88e5" stroke-width="4"/><ellipse cx="184" cy="50" rx="10" ry="7" fill="#0a2a5e"/></g>
+      <ellipse cx="110" cy="98" rx="48" ry="36" fill="#041230"/>
+      <ellipse cx="110" cy="72" rx="28" ry="20" fill="url(#headGrad)"/>
+      <rect x="97" y="56" width="4" height="10" rx="2" fill="#1565c0"/><rect x="119" y="56" width="4" height="10" rx="2" fill="#1565c0"/>
+      <g class="crab-eye-left"><circle cx="99" cy="54" r="7" fill="#041230"/><circle cx="99" cy="54" r="5" fill="#00e5ff"/><circle cx="97" cy="52" r="1" fill="white"/></g>
+      <g class="crab-eye-right"><circle cx="121" cy="54" r="7" fill="#041230"/><circle cx="121" cy="54" r="5" fill="#00e5ff"/><circle cx="119" cy="52" r="1" fill="white"/></g>
+      <defs><radialGradient id="headGrad"><stop offset="0%" stop-color="#1e88e5"/><stop offset="100%" stop-color="#041230"/></radialGradient></defs>
+    </svg>
+  </div>
+  <div class="hero-badge"><i class="fas fa-shield-alt"></i> Cybersecurity Command Interface</div>
+  <h1><span class="glitch crab-word">CRAB</span><span class="bot-word">-BOT</span></h1>
+  <p class="hero-subtitle">Execute pentest commands, automate threat intel, and manage infrastructure — all from your messaging app.</p>
+  <div class="hero-platforms"><span class="platform-pill"><i class="fab fa-telegram"></i> Telegram</span><span class="platform-pill"><i class="fab fa-discord"></i> Discord</span><span class="platform-pill"><i class="fab fa-whatsapp"></i> WhatsApp</span><span class="platform-pill"><i class="fab fa-slack"></i> Slack</span><span class="platform-pill"><i class="fas fa-lock"></i> Signal</span><span class="platform-pill"><i class="fab fa-google"></i> Google Chat</span><span class="platform-pill"><i class="fab fa-apple"></i> iMessage</span></div>
+  <div class="last-updated">Last Updated: <span>March 24, 2026</span> | Version <span>2.4.1</span></div>
+  <div class="scroll-hint"><i class="fas fa-chevron-down"></i> Scroll to terms</div>
+</section>
+
+<div class="section" id="overview"><div class="toc"><h3><i class="fas fa-list-ul"></i> Table of Contents</h3><ol><li><a href="#s1">Agreement & Acceptance</a></li><li><a href="#s2">Service Description</a></li><li><a href="#s3">Supported Platforms</a></li><li><a href="#s4">Eligibility</a></li><li><a href="#s5">Permitted Use</a></li><li><a href="#s6">User Responsibilities</a></li><li><a href="#s7">Security</a></li><li><a href="#s8">Privacy</a></li><li><a href="#s9">IP Rights</a></li><li><a href="#s10">Liability</a></li><li><a href="#s11">Termination</a></li><li><a href="#s12">Governing Law</a></li></ol></div></div>
+
+<div class="section" id="terms">
+  <div id="s1"><div class="section-number">01</div><div class="section-title">Agreement & Acceptance</div><div class="divider"></div><div class="card"><p>By using Crab-Bot (“Tool”), you accept these Terms. If you do not agree, stop using immediately. We may update Terms; continued use constitutes acceptance.</p><div class="highlight-box"><i class="fas fa-exclamation-triangle"></i><span><strong>Legal agreement:</strong> These Terms govern your access to Crab-Bot's cybersecurity command execution services.</span></div></div></div>
+  <div id="s2"><div class="section-number">02</div><div class="section-title">Description of Service</div><div class="divider"></div><div class="card"><h3><i class="fas fa-terminal"></i> Core Capabilities</h3><p>Remote security automation: authorized network scans, threat intel, log analysis, incident response, and custom scripts. Commands run via messaging platforms with RBAC and audit logging.</p></div></div>
+  <div id="s3"><div class="section-number">03</div><div class="section-title">Supported Platforms</div><div class="divider"></div><div class="card"><div class="platform-grid"><div class="platform-card"><i class="fab fa-telegram p-icon"></i><div><div class="p-name">Telegram</div><div class="p-desc">Bot API</div></div></div><div class="platform-card"><i class="fab fa-discord p-icon"></i><div><div class="p-name">Discord</div><div class="p-desc">Slash commands</div></div></div><div class="platform-card"><i class="fab fa-whatsapp p-icon"></i><div><div class="p-name">WhatsApp</div><div class="p-desc">Business API</div></div></div><div class="platform-card"><i class="fab fa-slack p-icon"></i><div><div class="p-name">Slack</div><div class="p-desc">App integration</div></div></div><div class="platform-card"><i class="fas fa-shield-hooded p-icon"></i><div><div class="p-name">Signal</div><div class="p-desc">Encrypted relay</div></div></div><div class="platform-card"><i class="fab fa-google p-icon"></i><div><div class="p-name">Google Chat</div><div class="p-desc">Workspace bot</div></div></div><div class="platform-card"><i class="fab fa-apple p-icon"></i><div><div class="p-name">iMessage</div><div class="p-desc">Business Chat</div></div></div></div></div></div>
+  <div id="s4"><div class="section-number">04</div><div class="section-title">Eligibility</div><div class="divider"></div><div class="card"><p>You must be 18+, legally authorized, and a qualified security professional or admin. Use prohibited where restricted by law.</p></div></div>
+  <div id="s5"><div class="section-number">05</div><div class="section-title">Permitted Use & Restrictions</div><div class="divider"></div><div class="card"><h3><i class="fas fa-check-circle"></i> Allowed</h3><ul><li>Authorized pentests on systems you own or have written permission</li><li>Security monitoring & automation</li><li>Research in isolated labs</li></ul><div class="warning-box"><i class="fas fa-skull-crosswalk"></i><span><strong>Prohibited:</strong> Unauthorized access, DDoS, malware deployment, targeting critical infrastructure, or any illegal activity.</span></div></div></div>
+  <div id="s6"><div class="section-number">06</div><div class="section-title">User Responsibilities</div><div class="divider"></div><div class="card"><p>You are fully liable for all commands executed, must retain authorization proof, secure API keys, and report vulnerabilities responsibly.</p></div></div>
+  <div id="s7"><div class="section-number">07</div><div class="section-title">Cybersecurity & Data Security</div><div class="divider"></div><div class="card"><p>TLS 1.3 encryption, MFA enforced, immutable audit logs, rate limiting. You must protect credentials and not bypass security controls.</p></div></div>
+  <div id="s8"><div class="section-number">08</div><div class="section-title">Privacy & Data Collection</div><div class="divider"></div><div class="card"><p>We collect account data, command logs (retained 90 days), and aggregated analytics. No selling of personal data. You may request deletion.</p><div class="highlight-box"><i class="fas fa-user-secret"></i><span>Audit logs are immutable for compliance.</span></div></div></div>
+  <div id="s9"><div class="section-number">09</div><div class="section-title">Intellectual Property</div><div class="divider"></div><div class="card"><p>Crab-Bot is our exclusive IP. You get a limited, revocable license to use the service as permitted. No reverse engineering, reselling, or trademark misuse.</p></div></div>
+  <div id="s10"><div class="section-number">10</div><div class="section-title">Liability & Disclaimers</div><div class="divider"></div><div class="card"><p>Service provided “AS IS”. We are not liable for indirect damages, data loss, or misuse. You indemnify us against claims arising from your violation of these Terms.</p><div class="warning-box"><i class="fas fa-gavel"></i><span>You bear sole responsibility for any legal consequences from executed commands.</span></div></div></div>
+  <div id="s11"><div class="section-number">11</div><div class="section-title">Termination</div><div class="divider"></div><div class="card"><p>We may suspend accounts for violations. You may delete your account anytime. Survival clauses: indemnification, liability limits.</p></div></div>
+  <div id="s12"><div class="section-number">12</div><div class="section-title">Governing Law</div><div class="divider"></div><div class="card"><p>Disputes settled via binding arbitration. Contact:accuratecyberdefense@tutamail.com for responsible disclosure.</p></div></div>
+</div>
+
+<!-- SOCIAL SECTION - REALISTIC ICONS -->
+<div class="social-section" id="community">
+  <h2><i class="fas fa-globe"></i> Join The Colony — Official Channels</h2>
+  <div class="social-links">
+    <a href="https://github.com/Iankulani/crab-bot-v0.0.1" target="_blank" rel="noopener" class="social-link" data-brand="github"><i class="fab fa-github"></i><span>GitHub</span></a>
+    <a href="https://t.me/crabbotofficial" target="_blank" rel="noopener" class="social-link" data-brand="telegram"><i class="fab fa-telegram"></i><span>Telegram</span></a>
+    <a href="https://discord.gg/DW46bUKX3b" target="_blank" rel="noopener" class="social-link" data-brand="discord"><i class="fab fa-discord"></i><span>Discord</span></a>
+    <a href="https://wa.me/1234567890" target="_blank" rel="noopener" class="social-link" data-brand="whatsapp"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></a>
+    <a href="https://www.pinterest.com/accuratecyberdefense/" target="_blank" rel="noopener" class="social-link" data-brand="pinterest"><i class="fab fa-pinterest"></i><span>Pinterest</span></a>
+    <a href="https://facebook.com/crabbotsec" target="_blank" rel="noopener" class="social-link" data-brand="facebook"><i class="fab fa-facebook-f"></i><span>Facebook</span></a>
+    <a href="https://x.com/crabbot_sec" target="_blank" rel="noopener" class="social-link" data-brand="x"><i class="fab fa-twitter"></i><span>X (Twitter)</span></a>
+    <a href="https://mastodon.social/@crabbot" target="_blank" rel="noopener" class="social-link" data-brand="mastodon"><i class="fab fa-mastodon"></i><span>Mastodon</span></a>
+    <a href="https://signal.group/#crabbot" target="_blank" rel="noopener" class="social-link" data-brand="signal"><i class="fab fa-signal-messenger"></i><span>Signal</span></a>
+    <a href="https://slack.com/crabbot" target="_blank" rel="noopener" class="social-link" data-brand="slack"><i class="fab fa-slack"></i><span>Slack</span></a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo"><i class="fas fa-crab"></i> CRAB-BOT</div>
+  <ul class="footer-links"><li><a href="#top">Terms of Service</a></li><li><a href="#s8">Privacy Policy</a></li><li><a href="#community">Contact</a></li><li><a href="#overview">Documentation</a></li></ul>
+  <div class="footer-copy">© 2063 Crab-Bot Security. All rights reserved. <i class="fas fa-shield-hooded"></i> Use responsibly.</div>
+</footer>
+
+<div class="mini-crab" id="miniCrab"><i class="fas fa-crab" style="font-size: 48px; color: #ff8c42; filter: drop-shadow(0 0 6px cyan);"></i></div>
+
+<div class="accept-banner" id="acceptBanner">
+  <p><i class="fas fa-balance-scale"></i> By continuing, you accept our <a href="#terms">Terms of Service</a> and acknowledge that Crab-Bot is a professional cybersecurity tool.</p>
+  <div><button class="btn btn-outline" onclick="dismissBanner()">Decline</button><button class="btn btn-primary" onclick="acceptTerms()">I Accept</button></div>
+</div>
+
+<script>
+  (function createBubbles() { for(let i=0;i<22;i++){ let b=document.createElement('div'); b.className='bubble'; let s=Math.random()*26+8; b.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}vw;animation-duration:${Math.random()*14+10}s;animation-delay:${Math.random()*12}s;`; document.body.appendChild(b); } })();
+  window.addEventListener('scroll',()=>{ let pct=(window.scrollY/(document.body.scrollHeight-window.innerHeight))*100; document.getElementById('progress-bar').style.width=pct+'%'; });
+  function acceptTerms(){ document.getElementById('acceptBanner').classList.add('hidden'); localStorage.setItem('crabbot_accepted','1'); }
+  function dismissBanner(){ document.getElementById('acceptBanner').classList.add('hidden'); }
+  if(localStorage.getItem('crabbot_accepted')) document.getElementById('acceptBanner').classList.add('hidden');
+  const observer=new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; observer.unobserve(e.target); } });},{threshold:0.1});
+  document.querySelectorAll('.card, .toc, .platform-card, .social-link').forEach(el=>{ el.style.opacity='0'; el.style.transform='translateY(20px)'; el.style.transition='opacity 0.45s ease, transform 0.45s ease'; observer.observe(el); });
+  document.getElementById('miniCrab').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+</script>
+</body>
+</html>
